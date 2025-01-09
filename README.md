@@ -113,8 +113,10 @@ ua, err := app.New()
 	if err != nil {
 		fmt.Println(err)
 	}
+// Random user-agent from a desktop device
+fmt.Println(ua.Filter().Platform(app.Desktop).Get())
 
-// Use filters by platform
+// Use filters by platform Tablet and Chrome browser
 fmt.Println(ua.Filter().Chrome().Platform(app.Tablet).Get())
 
 // Use filters by OS
@@ -123,3 +125,20 @@ fmt.Println(ua.Filter().Chrome().Os(app.IOS).Get())
 // Use filters by IOS And Windows
 fmt.Println(ua.Filter().Chrome().Os(app.IOS, app.Windows).Get())
 ```
+
+If you need, you can access the entire structure, for example if you need to get the BrowserVersion value or Percent
+
+```go
+ua, err := app.New()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+// Get Percent display
+fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).GetRaw().Percent)
+
+// Get all Go Struct
+fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).GetRaw())
+
+```
+
