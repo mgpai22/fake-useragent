@@ -4,12 +4,19 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
 
 	"golang.org/x/exp/rand"
 )
+
+func getPackageFilePath(filename string) string {
+	_, currentFile, _, _ := runtime.Caller(0)
+	return filepath.Join(filepath.Dir(currentFile), "src", filename)
+}
 
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
@@ -46,7 +53,7 @@ func ExtractMajorVersion(version string) int {
 }
 
 func loadFile() (*os.File, error) {
-	file, err := os.Open(userAgentsFile)
+	file, err := os.Open(getPackageFilePath(userAgentsFile))
 	if err != nil {
 		return nil, err
 	}

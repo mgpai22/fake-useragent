@@ -1,6 +1,6 @@
 package fakeUserAgent
 
-const userAgentsFile = "src/userAgents.json"
+const userAgentsFile = "userAgents.json"
 
 // Browsers
 const (
