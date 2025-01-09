@@ -47,7 +47,7 @@ fmt.Println(ua.Filter().Edge().Get())
 ### Advanced Use
 
 You can specify additional user-agent filters
-#### Supported next Browsers, OS and platforms un fake-useragent
+#### Supported next Browsers, OS and platforms in fake-useragent
 ```go
 // Browsers
 const (
