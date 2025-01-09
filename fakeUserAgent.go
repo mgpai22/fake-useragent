@@ -84,6 +84,7 @@ func New() (*UserAgent, error) {
 }
 
 // Gets random user-Agent without filters
+// This method don't init filter method
 func (c *UserAgent) GetRandom() string {
 	filteredList := Filter(c.List, func(d UserAgents) bool {
 		return true
@@ -120,6 +121,7 @@ func (c *FilterBy) GetRaw() UserAgents {
 }
 
 // Get filtered user-Agent list
+// Get from memory new filtered list
 func (c *FilterBy) getList() *[]UserAgents {
 	if c.UserAgent.Filtered != nil {
 		return &c.UserAgent.Filtered
