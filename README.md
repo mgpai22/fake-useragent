@@ -20,6 +20,12 @@ Simple usage examples
 
 
 ```go
+//...
+import (
+	"fmt"
+	app "github.com/lib4u/fake-useragent"
+)
+//....
 ua, err := app.New()
 	if err != nil {
 		fmt.Println(err)
