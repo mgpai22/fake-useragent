@@ -13,3 +13,33 @@ Up-to-date simple useragent faker with real world database in Golang
  ```sh
 go get github.com/lib4u/fake-useragent
 ```
+
+### Usage
+
+Simple usage examples
+
+
+```go
+ua, err := app.New()
+	if err != nil {
+		fmt.Println(err)
+	}
+// Get random user-agent in string
+fmt.Println(ua.GetRandom())  // Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+
+// Get user-agent string from a specific browser
+fmt.Println(ua.Filter().Chrome().Get())
+// Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36
+
+fmt.Println(ua.Filter().Firefox().Get())
+//Mozilla/5.0 (Android 14; Mobile; rv:133.0) Gecko/133.0 Firefox/133.0
+
+fmt.Println(ua.Filter().Safari().Get())
+//Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Mobile/15E148 Safari/604.1
+
+fmt.Println(ua.Filter().Opera().Get())
+//Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0
+
+fmt.Println(ua.Filter().Edge().Get())
+//Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0
+```
