@@ -43,3 +43,83 @@ fmt.Println(ua.Filter().Opera().Get())
 fmt.Println(ua.Filter().Edge().Get())
 //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0
 ```
+
+### Advanced Use
+
+You can specify additional user-agent filters
+#### Supported next Browsers, OS and platforms un fake-useragent
+```go
+// Browsers
+const (
+	Google           = "Google"
+	Chrome           = "Chrome"
+	Firefox          = "Firefox"
+	Edge             = "Edge"
+	Opera            = "Opera"
+	Safari           = "Safari"
+	AndroidBrowser   = "Android"
+	YandexBrowser    = "Yandex Browser"
+	SamsungInternet  = "Samsung Internet"
+	OperaMobile      = "Opera Mobile"
+	MobileSafari     = "Mobile Safari"
+	FirefoxMobile    = "Firefox Mobile"
+	FirefoxiOS       = "Firefox iOS"
+	ChromeMobile     = "Chrome Mobile"
+	ChromeMobileiOS  = "Chrome Mobile iOS"
+	MobileSafariUIWK = "Mobile Safari UI/WKWebView"
+	EdgeMobile       = "Edge Mobile"
+	DuckDuckGoMobile = "DuckDuckGo Mobile"
+	MiuiBrowser      = "MiuiBrowser"
+	Whale            = "Whale"
+	Twitter          = "Twitter"
+	Facebook         = "Facebook"
+	AmazonSilk       = "Amazon Silk"
+)
+
+// OS
+const (
+	Windows  = "Windows"
+	Linux    = "Linux"
+	Ubuntu   = "Ubuntu"
+	ChromeOS = "Chrome OS"
+	MacOSX   = "Mac OS X"
+	Android  = "Android"
+	IOS      = "iOS"
+)
+
+// Platforms
+const (
+	Mobile  = "mobile"
+	Tablet  = "tablet"
+	Desktop = "desktop"
+)
+```
+If you want to specify your own browser list, you can do that via the browsers argument.
+This example will only return random user-agents from Firefox and Chrome:
+
+```go
+ua, err := app.New()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+// Use filters by browser
+fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).Get())
+
+```
+Also you can use filter by Platform and OS
+```go
+ua, err := app.New()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+// Use filters by platform
+fmt.Println(ua.Filter().Chrome().Platform(app.Tablet).Get())
+
+// Use filters by OS
+fmt.Println(ua.Filter().Chrome().Os(app.IOS).Get())
+
+// Use filters by IOS And Windows
+fmt.Println(ua.Filter().Chrome().Os(app.IOS, app.Windows).Get())
+```
