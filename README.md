@@ -1,5 +1,8 @@
 # fake-useragent
-![img](https://github.com/user-attachments/assets/4a28c3fe-4e9d-4a4f-a677-9ea454fcdd34)
+<p align="center">
+  <img width="400" height="250" src="https://github.com/user-attachments/assets/4a28c3fe-4e9d-4a4f-a677-9ea454fcdd34">
+</p>
+
 
 Up-to-date simple useragent faker with real world database in Golang
 
