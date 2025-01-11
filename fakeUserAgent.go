@@ -50,10 +50,12 @@ const (
 type UserAgent struct {
 	List     *[]UserAgents
 	Filtered []UserAgents
+	fallback *string
 }
 
 type FilterBy struct {
 	UserAgent *UserAgent
+	fallback  *string
 }
 
 type UserAgents struct {
@@ -80,7 +82,8 @@ func New() (*UserAgent, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &UserAgent{List: userAgents}, nil
+	fallbackDefault := ""
+	return &UserAgent{List: userAgents, fallback: &fallbackDefault}, nil
 }
 
 // Gets random user-Agent without filters
@@ -95,7 +98,13 @@ func (c *UserAgent) GetRandom() string {
 
 // Init filters for user-Agent
 func (c *UserAgent) Filter() *FilterBy {
-	return &FilterBy{UserAgent: c}
+	return &FilterBy{UserAgent: c, fallback: c.fallback}
+}
+
+// Set fallback user_agent
+func (c *UserAgent) SetFallback(fallback string) *UserAgent {
+	c.fallback = &fallback
+	return c
 }
 
 // Gets from filters
@@ -103,7 +112,7 @@ func (c *UserAgent) Filter() *FilterBy {
 func (c *FilterBy) Get() string {
 	filteredList := *c.getList()
 	if len(filteredList) == 0 {
-		return ""
+		return *c.fallback
 	}
 	randomIndex := randFromLen(len(filteredList))
 	return filteredList[randomIndex].Useragent
