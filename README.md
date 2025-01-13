@@ -154,7 +154,7 @@ fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).GetRaw())
 
 ```
 
-You can ser the fallback string using the SetFallback function, in much rare cases something failed:
+You can set the fallback string using the SetFallback function, in much rare cases something failed:
 
 ```go
 ua, err := app.New()
