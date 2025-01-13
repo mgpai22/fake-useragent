@@ -154,3 +154,16 @@ fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).GetRaw())
 
 ```
 
+You can ser the fallback string using the SetFallback function, in much rare cases something failed:
+
+```go
+ua, err := app.New()
+	if err != nil {
+		fmt.Println(err)
+	}
+ // Set Fallback string
+ ua.SetFallback("user favorite user-agent")
+// Use filters by browser
+fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).Get())
+
+```
