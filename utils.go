@@ -11,11 +11,14 @@ import (
 	"time"
 
 	"golang.org/x/exp/rand"
+	"embed"
 )
 
+//go:embed src/*
+var embeddedFiles embed.FS
+
 func getPackageFilePath(filename string) string {
-	_, currentFile, _, _ := runtime.Caller(0)
-	return filepath.Join(filepath.Dir(currentFile), "src", filename)
+	return filepath.Join("src", filename)
 }
 
 func stringInSlice(a string, list []string) bool {
@@ -38,9 +41,9 @@ func Filter[E any](s *[]E, f func(E) bool) []E {
 }
 
 func randFromLen(n int) int {
-	rand.Seed(uint64(time.Now().UnixNano()))
-	randomInt := rand.Intn(n)
-	return randomInt
+	src := rand.NewSource(uint64(time.Now().UnixNano()))
+	r := rand.New(src)
+	return r.Intn(n)
 }
 
 func ExtractMajorVersion(version string) int {
@@ -52,12 +55,8 @@ func ExtractMajorVersion(version string) int {
 	return 0
 }
 
-func loadFile() (*os.File, error) {
-	file, err := os.Open(getPackageFilePath(userAgentsFile))
-	if err != nil {
-		return nil, err
-	}
-	return file, nil
+func loadFile() (io.Reader, error) {
+	return embeddedFiles.Open(getPackageFilePath(userAgentsFile))
 }
 
 func getUserAgents(r io.Reader) (*[]UserAgents, error) {
