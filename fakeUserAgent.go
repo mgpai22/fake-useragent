@@ -77,7 +77,6 @@ func New() (*UserAgent, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
 	userAgents, err := getUserAgents(file)
 	if err != nil {
 		return nil, err
@@ -89,7 +88,7 @@ func New() (*UserAgent, error) {
 // Gets random user-Agent without filters
 // This method don't init filter method
 func (c *UserAgent) GetRandom() string {
-	if c.UserAgent.List == nil {
+	if c.List == nil {
 		return ""
 	}
 	filteredList := Filter(c.List, func(d UserAgents) bool {
