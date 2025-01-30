@@ -89,6 +89,9 @@ func New() (*UserAgent, error) {
 // Gets random user-Agent without filters
 // This method don't init filter method
 func (c *UserAgent) GetRandom() string {
+	if c.UserAgent.List == nil {
+		return ""
+	}
 	filteredList := Filter(c.List, func(d UserAgents) bool {
 		return true
 	})
@@ -110,6 +113,9 @@ func (c *UserAgent) SetFallback(fallback string) *UserAgent {
 // Gets from filters
 // Method return userAgent string only or empty string if nothing found
 func (c *FilterBy) Get() string {
+	if c.UserAgent.List == nil {
+		return *c.fallback
+	}
 	filteredList := *c.getList()
 	if len(filteredList) == 0 {
 		return *c.fallback
@@ -121,6 +127,9 @@ func (c *FilterBy) Get() string {
 // Gets from filters
 // Method return all struct UserAgents or empty UserAgents struct if nothing found
 func (c *FilterBy) GetRaw() UserAgents {
+	if c.UserAgent.List == nil {
+		return UserAgents{}
+	}
 	filteredList := *c.getList()
 	if len(filteredList) == 0 {
 		return UserAgents{}
@@ -134,6 +143,9 @@ func (c *FilterBy) GetRaw() UserAgents {
 func (c *FilterBy) getList() *[]UserAgents {
 	if c.UserAgent.Filtered != nil {
 		return &c.UserAgent.Filtered
+	}
+	if c.UserAgent.List == nil {
+		return &[]UserAgents{}
 	}
 	return c.UserAgent.List
 }
