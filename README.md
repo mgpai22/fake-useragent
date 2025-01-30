@@ -1,8 +1,8 @@
 # fake-useragent
+
 <p align="center">
   <img width="400" height="250" src="https://github.com/user-attachments/assets/4a28c3fe-4e9d-4a4f-a677-9ea454fcdd34">
 </p>
-
 
 Up-to-date simple useragent faker with real world database in Golang
 
@@ -16,20 +16,20 @@ Up-to-date simple useragent faker with real world database in Golang
 - This Golang package has the same functionality as popular Python libray "Fake-useragent" and based on same Json user-agents database
 - Compatible fake user-agent with Colly Scraping Framework and other.
 - Compatible fake user-agent with net/http standard library.
- ```sh
-go get github.com/lib4u/fake-useragent
+
+```sh
+go get github.com/mgpai22/fake-useragent
 ```
 
 ### Usage
 
 Simple usage examples
 
-
 ```go
 //...
 import (
 	"fmt"
-	app "github.com/lib4u/fake-useragent"
+	app "github.com/mgpai22/fake-useragent"
 )
 //....
 ua, err := app.New()
@@ -59,7 +59,9 @@ fmt.Println(ua.Filter().Edge().Get())
 ### Advanced Use
 
 You can specify additional user-agent filters
+
 #### Supported next Browsers, OS and platforms in fake-useragent
+
 ```go
 // Browsers
 const (
@@ -106,6 +108,7 @@ const (
 	Desktop = "desktop"
 )
 ```
+
 If you want to specify your own browser list, you can do that via the browsers argument.
 This example will only return random user-agents from Firefox and Chrome:
 
@@ -119,7 +122,9 @@ ua, err := app.New()
 fmt.Println(ua.Filter().Browser(app.Firefox, app.Chrome).Get())
 
 ```
+
 Also you can use filter by Platform and OS
+
 ```go
 ua, err := app.New()
 	if err != nil {
