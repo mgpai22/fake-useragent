@@ -3,9 +3,7 @@ package fakeUserAgent
 import (
 	"encoding/json"
 	"io"
-	"os"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
